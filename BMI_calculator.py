@@ -2,7 +2,6 @@ import sign_up
 import pymongo
 from tkinter import *
 from pymongo import *
-from bson.objectid import ObjectId
 
 
 
@@ -95,11 +94,7 @@ BMI_listbox.place(x = 25, y = 285,width = 300, height = 120)
 def value_error():
 	Error_msg1.place(x = 33, y = 240)
 
-  
    #Generating the window #  
 window.title("BMI Calculator")
 window.geometry("350x500+550+100")
 window.mainloop()
-
-
-
