@@ -49,8 +49,6 @@ def metric_calculator():
 
 
 	current_doc = list(users_data.find({},sort = [( '_id', pymongo.DESCENDING )]).limit(1))
-	excisting_in_doc = { "BMI" : ""}
-	updated_doc = {"$ set" : {"BMI" : 10}}
 	data = dict(current_doc[0])
 	user_name = data["Username"]
 	
