@@ -1,5 +1,6 @@
 from tkinter import *
 from pymongo import *
+
 # from BMI_calculator import calculate_bmi
 
 
@@ -10,24 +11,22 @@ sex = StringVar()
 Data_Base = client.BMI
 users_data = Data_Base.users_data
 
+		# Classes #
 
-		
+
 		# functions #
-def query_info():
-
-	user_name = user_entry.get()
-	return user_name
-
+def data_sender():
+	pass
 def signing_in():
 
 	user_name = user_entry.get()
 	gender = str(sex.get())
-	profile = { "Username" : user_name , "Gender" : gender}
+	profile = { "Username" : user_name , "Gender" : gender , "BMI" : ""}
 
 	users_data.insert_one(profile)
 
+	data_sender()
 	window_sign_in.destroy()
-	calculate_bmi()
 
 
 def finish():
@@ -42,7 +41,7 @@ password_label = Label(window_sign_in, text = "Password  :" , font = ("Arial", 1
 user_entry = Entry(window_sign_in, bd = 3)
 password_entry = Entry(window_sign_in, bd = 3)
 	# Buttons #
-sign_in_button = Button(window_sign_in, text = " Done ", command = signing_in)
+sign_in_button = Button(window_sign_in, text = " Done ", command = signing_in )
 	# Radiobutton #
 male_button = Radiobutton(window_sign_in, text = "male", borderwidth = 0, variable = sex, value = "male", font = ("Arial" , 12), command = finish)
 female_button = Radiobutton(window_sign_in, text = "female", borderwidth = 0, variable = sex, value = "female", font = ("Arial" , 12), command = finish)
@@ -61,7 +60,8 @@ male_button.place(x = 65 , y = 130)
 female_button.place(x = 175 , y = 130)
 
 
-
+def test2():
+	number = 2
 
 
 

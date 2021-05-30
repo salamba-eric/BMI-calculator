@@ -1,10 +1,13 @@
+import sign_up
+import pymongo
 from tkinter import *
 from pymongo import *
+from bson.objectid import ObjectId
+
 
 
 window = Tk()
 client = MongoClient()
-sign = sign_up()
 
 Data_Base = client.BMI
 users_data = Data_Base.users_data
@@ -44,9 +47,15 @@ def metric_calculator():
 	BMI_listbox.insert(1, "    " + str(BMI))
 	BMI_listbox.insert(2 ,comment)
 
-def edit():
-	for doc1 in users_data.find():
-		users_data.update_one({"Username":"Eric Salamba"},{"$set":{"BMI":"female"}})
+
+	current_doc = list(users_data.find({},sort = [( '_id', pymongo.DESCENDING )]).limit(1))
+	excisting_in_doc = { "BMI" : ""}
+	updated_doc = {"$ set" : {"BMI" : 10}}
+	data = dict(current_doc[0])
+	user_name = data["Username"]
+	
+	
+	users_data.update_one({"Username": user_name },{"$set":{"BMI": BMI }})
 
 					# Window widgets #
 	# The labels #
@@ -62,7 +71,7 @@ height_str = Entry(window, bg = "white", fg = "black", bd = 3)
 weight_str = Entry(window, bg = "white", fg = "black", bd = 3)
 BMI_display_entry = Entry(window, font = ("Arial", 12))
 	#The buttons#
-calculate_button = Button(window,text = "Calculate", bd = 1, font = ("Arial" , 12), command = edit)
+calculate_button = Button(window,text = "Calculate", bd = 1, font = ("Arial" , 12), command = metric_calculator)
 	#The listbox #
 BMI_listbox = Listbox(window,width = 30, height = 11, font = ("Raleway" ))
 
